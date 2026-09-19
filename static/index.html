@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ScreenGuard — privacy, before you share</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="wordmark"><span class="mark">S</span><span>ScreenGuard</span></div>
+      <div class="session"><i></i><span id="connection">local session</span></div>
+    </header>
+
+    <section class="intro">
+      <div>
+        <p class="eyebrow">PRIVATE BY DEFAULT</p>
+        <h1>Know what your screen<br><em>is giving away.</em></h1>
+        <p class="lede">A small local monitor for demos, screen shares, and recordings. It watches for visible faces and sensitive text before it becomes an accidental screenshot.</p>
+      </div>
+      <div class="mode-switch">
+        <button class="mode active" data-mode="camera">Camera</button>
+        <button class="mode" data-mode="screen">Screen</button>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <div class="viewer">
+        <div class="viewer-head">
+          <span>LIVE FEED</span>
+          <span id="fps">idle</span>
+        </div>
+        <div class="stage">
+          <video id="video" autoplay muted playsinline></video>
+          <canvas id="canvas" hidden></canvas>
+          <div class="scanline"></div>
+          <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+          <div id="empty" class="empty">
+            <div class="crosshair">＋</div>
+            <strong>Nothing is being watched</strong>
+            <span>Choose Camera or Screen to begin.</span>
+          </div>
+        </div>
+        <div class="viewer-foot">
+          <span id="source">source: —</span>
+          <button id="stop" class="quiet" type="button">Stop feed</button>
+        </div>
+      </div>
+
+      <aside class="side">
+        <div class="risk-card">
+          <div class="risk-label"><span>PRIVACY RISK</span><span id="status">READY</span></div>
+          <div class="risk-row"><strong id="risk">0</strong><span>/100</span></div>
+          <div class="meter"><b id="meter"></b></div>
+          <p id="summary">Start a feed to run the local detector.</p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">WHAT I SEE <span id="count">0</span></div>
+          <div id="findings" class="findings"><div class="muted">No findings yet.</div></div>
+        </div>
+
+        <div class="panel timeline">
+          <div class="panel-title">RECENT EVENTS</div>
+          <div id="events"><div class="event muted">Waiting for first frame…</div></div>
+        </div>
+      </aside>
+    </section>
+
+    <footer>
+      <span>LOCAL ANALYSIS · NO CLOUD MODEL</span>
+      <span>ScreenGuard AI / 01</span>
+    </footer>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
