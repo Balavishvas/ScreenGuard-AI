@@ -3,76 +3,59 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>ScreenGuard — privacy, before you share</title>
+  <title>ScreenGuard — Exposure Monitor</title>
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <main class="app-shell">
+  <div class="app-shell">
     <header class="topbar">
-      <div class="wordmark"><span class="mark">S</span><span>ScreenGuard</span></div>
-      <div class="session"><i></i><span id="connection">local session</span></div>
+      <a class="brand" href="/" aria-label="ScreenGuard home">
+        <span class="brand-icon" aria-hidden="true">
+          <svg viewBox="0 0 44 44"><path d="M22 3 38 9v11c0 10.2-6.6 17.5-16 21C12.6 37.5 6 30.2 6 20V9l16-6Z"/><path d="M14 21.5 19.2 27 30.5 15"/></svg>
+        </span>
+        <span><b>Screen</b>Guard</span>
+      </a>
+      <div class="top-status"><span class="status-dot"></span><span id="connection">LOCAL SESSION</span></div>
     </header>
-
-    <section class="intro">
-      <div>
-        <p class="eyebrow">PRIVATE BY DEFAULT</p>
-        <h1>Know what your screen<br><em>is giving away.</em></h1>
-        <p class="lede">A small local monitor for demos, screen shares, and recordings. It watches for visible faces and sensitive text before it becomes an accidental screenshot.</p>
-      </div>
-      <div class="mode-switch">
-        <button class="mode active" data-mode="camera">Camera</button>
-        <button class="mode" data-mode="screen">Screen</button>
-      </div>
-    </section>
-
-    <section class="workspace">
-      <div class="viewer">
-        <div class="viewer-head">
-          <span>LIVE FEED</span>
-          <span id="fps">idle</span>
+    <main>
+      <section class="hero-row">
+        <div><div class="kicker">EXPOSURE CONTROL / 01</div><h1>Your screen has secrets.<br><span>Check before you share.</span></h1></div>
+        <div class="mode-dock">
+          <span class="dock-label">INPUT</span>
+          <button class="mode active" data-mode="camera"><span>01</span> Camera</button>
+          <button class="mode" data-mode="screen"><span>02</span> Screen</button>
         </div>
-        <div class="stage">
-          <video id="video" autoplay muted playsinline></video>
-          <canvas id="canvas" hidden></canvas>
-          <div class="scanline"></div>
-          <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-          <div id="empty" class="empty">
-            <div class="crosshair">＋</div>
-            <strong>Nothing is being watched</strong>
-            <span>Choose Camera or Screen to begin.</span>
+      </section>
+      <section class="control-grid">
+        <div class="feed-card">
+          <div class="feed-top"><div><span class="live-mark"></span> LIVE INSPECTION</div><span id="fps">IDLE</span></div>
+          <div class="stage">
+            <video id="video" autoplay muted playsinline></video><canvas id="canvas" hidden></canvas>
+            <div class="grid-overlay"></div><div class="focus-box"></div><div class="feed-label">LOCAL / FRAME ANALYSIS</div>
+            <div id="empty" class="empty"><div class="radar"><i></i></div><strong>Inspection paused</strong><span>Select an input above to begin.</span></div>
           </div>
+          <div class="feed-bottom"><span id="source">SOURCE / —</span><button id="stop" class="stop-btn" type="button">Stop inspection</button></div>
         </div>
-        <div class="viewer-foot">
-          <span id="source">source: —</span>
-          <button id="stop" class="quiet" type="button">Stop feed</button>
-        </div>
-      </div>
-
-      <aside class="side">
-        <div class="risk-card">
-          <div class="risk-label"><span>PRIVACY RISK</span><span id="status">READY</span></div>
-          <div class="risk-row"><strong id="risk">0</strong><span>/100</span></div>
-          <div class="meter"><b id="meter"></b></div>
-          <p id="summary">Start a feed to run the local detector.</p>
-        </div>
-
-        <div class="panel">
-          <div class="panel-title">WHAT I SEE <span id="count">0</span></div>
-          <div id="findings" class="findings"><div class="muted">No findings yet.</div></div>
-        </div>
-
-        <div class="panel timeline">
-          <div class="panel-title">RECENT EVENTS</div>
-          <div id="events"><div class="event muted">Waiting for first frame…</div></div>
-        </div>
-      </aside>
-    </section>
-
-    <footer>
-      <span>LOCAL ANALYSIS · NO CLOUD MODEL</span>
-      <span>ScreenGuard AI / 01</span>
-    </footer>
-  </main>
+        <aside class="inspector">
+          <section class="risk-panel">
+            <div class="panel-head"><span>EXPOSURE INDEX</span><span id="status">READY</span></div>
+            <div class="score"><strong id="risk">0</strong><small>/100</small></div>
+            <div class="risk-track"><b id="meter"></b></div>
+            <p id="summary">Start an inspection to evaluate the visible frame.</p>
+          </section>
+          <section class="findings-panel">
+            <div class="panel-head"><span>EXPOSURES FOUND</span><b id="count">0</b></div>
+            <div id="findings" class="findings"><div class="empty-note">No findings yet.</div></div>
+          </section>
+          <section class="events-panel">
+            <div class="panel-head"><span>ACTIVITY LOG</span><span>LAST 5</span></div>
+            <div id="events"><div class="event muted">Waiting for inspection…</div></div>
+          </section>
+        </aside>
+      </section>
+    </main>
+    <footer><div><span class="shield-mini">✓</span> LOCAL PROCESSING · NO CLOUD MODEL</div><div>FASTAPI / OPENCV / OCR</div></footer>
+  </div>
   <script src="/static/app.js"></script>
 </body>
 </html>
